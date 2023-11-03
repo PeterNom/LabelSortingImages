@@ -1,15 +1,12 @@
 ﻿
 using LabelSortingImages;
+using System.Globalization;
 
 Console.WriteLine("Image Handler For TD/ 41SP TVs");
 
 Console.WriteLine("Enter the path of the image folder.");
 
-string path = "C:\\Users\\peter\\Pictures\\Saved Pictures\\photos October_new";//Console.ReadLine();
-
-AddImagesSorted addImages = new(path);
-
-//addImages.renameSortedImages();
+string path = "C:\\Users\\peter\\Pictures\\Saved Pictures\\photos October_new";
 
 
 bool showMenu = true;
@@ -20,7 +17,6 @@ while (showMenu)
 
 bool MainMenu()
 {
-    Console.Clear();
     Console.WriteLine("Choose an option:");
     Console.WriteLine("1) Rename all images");
     Console.WriteLine("2) Add images at a specific index");
@@ -44,25 +40,53 @@ bool MainMenu()
 
 string CaptureInput()
 {
-    return Console.ReadLine();
+    String? capturedInput = null;
+
+    do
+    {
+        capturedInput = Console.ReadLine();
+
+    } while (capturedInput == null);
+
+    return capturedInput;
 }
 
 void EnterByIndex()
 {
-    Console.Clear();
     Console.WriteLine("Enter the path of the images.");
-    path = CaptureInput();
+    try
+    {
+        path = CaptureInput();
+        Path.GetFullPath(path);
+    }
+    catch(Exception ex)
+    {
+        Console.WriteLine("Something is wrong with the path you entered.\n");
+        Console.WriteLine(ex.ToString());
+        return;
+    }
 
-    Console.Clear();
+    AddImagesSorted addImages = new(path);
     Console.WriteLine("Enter index.");
     addImages.addImages(CaptureInput());
 }
 
 void RenameAll()
 {
-    Console.Clear();
     Console.WriteLine("Enter the path of the images.");
-    path = CaptureInput();
 
-    addImages.renameSortedImages();
+    try
+    {
+        path = CaptureInput();
+        Path.GetFullPath(path);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Something is wrong with the path you entered.\n");
+        Console.WriteLine(ex.ToString());
+        return;
+    }
+
+    AddImagesSorted addImages = new(path);
+    addImages.RenameSortedImages();
 }

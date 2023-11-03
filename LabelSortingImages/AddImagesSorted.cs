@@ -11,7 +11,6 @@ namespace LabelSortingImages
     {
         private List<string>? images = new List<string>();
         private string folderPath;
-        private string index = "aaaa";
         Char[] _col = new char[4];
         private int counter = 0;
 
@@ -28,7 +27,7 @@ namespace LabelSortingImages
             
         }
 
-        public void renameSortedImages()
+        public void RenameSortedImages()
         {
             int columIndex = 3;
             foreach (string imageName in Directory.EnumerateFiles(folderPath, "*.jpg"))
@@ -63,7 +62,7 @@ namespace LabelSortingImages
 
                 if(columId==index)
                 {
-                    foreach (string newImages in Directory.EnumerateFiles(folderPath+"\\test", "*.jpg"))
+                    foreach (string newImages in Directory.EnumerateFiles(folderPath+ "\\toAdd", "*.jpg"))
                     {
                         if ((++counter) % 25 == 0)
                         {
